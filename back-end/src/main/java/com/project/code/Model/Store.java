@@ -1,35 +1,56 @@
 package com.project.code.Model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
+@Entity
 public class Store {
 
-// 1. Add 'id' field:
-//    - Type: private long 
-//    - This field will be auto-incremented.
-//    - Use @Id to mark it as the primary key.
-//    - Use @GeneratedValue(strategy = GenerationType.IDENTITY) to auto-increment it.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-// 2. Add 'name' field:
-//    - Type: private String
-//    - This field cannot be empty, use the @NotNull annotation to enforce this rule.
+    @NotBlank(message = "Store name cannot be blank")
+    @Column(nullable = false)
+    private String name;
 
-// 3. Add 'address' field:
-//    - Type: private String
-//    - This field cannot be empty, use the @NotNull and @NotBlank annotations to enforce this rule.
+    @Column
+    private String address;
 
-// 4. Add relationships:
-//    - **Inventory**: A store can have multiple inventory entries.
-//    - Use @OneToMany(mappedBy = "store") to reflect the one-to-many relationship with Inventory.
-//    - Use @JsonManagedReference("inventory-store") to manage bidirectional relationships and avoid circular references.
+    public Store() {
+    }
 
-// 5. Add constructor:
-//    - Create a constructor that accepts name and address as parameters to initialize the Store object.
+    public Store(Long id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
 
-// 6. Add @Entity annotation:
-//    - Use @Entity above the class name to mark it as a JPA entity.
+    public Long getId() {
+        return id;
+    }
 
-// 7. Add Getters and Setters:
-//    - Add getter and setter methods for all fields (id, name, address).
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
-
